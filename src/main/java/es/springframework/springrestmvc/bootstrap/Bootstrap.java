@@ -1,7 +1,9 @@
 package es.springframework.springrestmvc.bootstrap;
 
 import es.springframework.springrestmvc.domain.Category;
+import es.springframework.springrestmvc.domain.Customer;
 import es.springframework.springrestmvc.repositories.CategoryRepository;
+import es.springframework.springrestmvc.repositories.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -10,9 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Bootstrap implements CommandLineRunner {
     private CategoryRepository categoryRepository;
+    private CustomerRepository customerRepository;
 
-    public Bootstrap(CategoryRepository categoryRepository) {
+    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository) {
         this.categoryRepository = categoryRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -39,6 +43,20 @@ public class Bootstrap implements CommandLineRunner {
         categoryRepository.save(exotic);
         categoryRepository.save(nuts);
 
-        log.info("Data Loaded: {}", categoryRepository.count());
+        log.info("Categories Loaded: {}", categoryRepository.count());
+
+        Customer bob = new Customer();
+        bob.setFirstName("Bob");
+        bob.setLastName("Bobinson");
+
+        Customer jean = new Customer();
+        jean.setFirstName("Jean");
+        jean.setLastName("Jeaninson");
+
+        customerRepository.save(bob);
+        customerRepository.save(jean);
+
+        log.info("Customers Loaded: {}", customerRepository.count());
+
     }
 }
