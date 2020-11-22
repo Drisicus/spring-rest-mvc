@@ -12,8 +12,8 @@ public abstract class CustomerMapperDecorator implements CustomerMapper {
     private CustomerMapper delegate;
 
     @Override
-    public CustomerDTO customerToCustomerDTP(Customer customer) {
-        CustomerDTO customerDTO = delegate.customerToCustomerDTP(customer);
+    public CustomerDTO customerToCustomerDT0(Customer customer) {
+        CustomerDTO customerDTO = delegate.customerToCustomerDT0(customer);
         customerDTO.setCustomerUrl("/api/v1/customers/" + customer.getId());
         return customerDTO;
     }

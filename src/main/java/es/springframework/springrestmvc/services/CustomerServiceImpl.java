@@ -2,6 +2,7 @@ package es.springframework.springrestmvc.services;
 
 import es.springframework.springrestmvc.api.v1.mapper.CustomerMapper;
 import es.springframework.springrestmvc.api.v1.model.CustomerDTO;
+import es.springframework.springrestmvc.domain.Customer;
 import es.springframework.springrestmvc.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +22,27 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
-        return customerRepository.findAll().stream().map(customerMapper::customerToCustomerDTP).collect(Collectors.toList());
+        return customerRepository.findAll().stream().map(customerMapper::customerToCustomerDT0).collect(Collectors.toList());
     }
 
     @Override
     public CustomerDTO getCustomerById(Long id) {
-        return customerRepository.findById(id).map(customerMapper::customerToCustomerDTP)
+        return customerRepository.findById(id).map(customerMapper::customerToCustomerDT0)
                 .orElseThrow(RuntimeException::new);
     }
+
+    @Override
+    public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
+        Customer customer = customerMapper.customerDtoToCustomer(customerDTO);
+        Customer savedCustomer = customerRepository.save(customer);
+        return customerMapper.customerToCustomerDT0(savedCustomer);
+    }
+
+    @Override
+    public CustomerDTO saveCustomerByDTO(Long id, CustomerDTO customerDTO) {
+        Customer customer = customerMapper.customerDtoToCustomer(customerDTO);
+        customer.setId(id);
+        return customerMapper.customerToCustomerDT0(customerRepository.save(customer));
+    }
+
 }

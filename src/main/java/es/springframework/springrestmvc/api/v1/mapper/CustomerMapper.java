@@ -10,5 +10,6 @@ import org.mapstruct.factory.Mappers;
 @DecoratedWith(CustomerMapperDecorator.class)
 public interface CustomerMapper {
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
-    CustomerDTO customerToCustomerDTP(Customer customer);
+    CustomerDTO customerToCustomerDT0(Customer customer);
+    Customer customerDtoToCustomer(CustomerDTO customerDTO);
 }
