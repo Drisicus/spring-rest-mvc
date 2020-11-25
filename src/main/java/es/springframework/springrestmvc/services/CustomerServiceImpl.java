@@ -7,6 +7,7 @@ import es.springframework.springrestmvc.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +44,15 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerMapper.customerDtoToCustomer(customerDTO);
         customer.setId(id);
         return customerMapper.customerToCustomerDT0(customerRepository.save(customer));
+    }
+
+    @Override
+    public CustomerDTO patchCustomer(Long id, CustomerDTO customerDTO) {
+        return customerRepository.findById(id).map(customer -> {
+           customer.setFirstName(Optional.ofNullable(customerDTO.getFirstName()).orElse(customer.getFirstName()));
+           customer.setLastName(Optional.ofNullable(customerDTO.getLastName()).orElse(customer.getLastName()));
+           return customerMapper.customerToCustomerDT0(customerRepository.save(customer));
+        }).orElseThrow(RuntimeException::new);
     }
 
 }
