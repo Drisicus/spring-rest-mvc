@@ -2,8 +2,10 @@ package es.springframework.springrestmvc.bootstrap;
 
 import es.springframework.springrestmvc.domain.Category;
 import es.springframework.springrestmvc.domain.Customer;
+import es.springframework.springrestmvc.domain.Vendor;
 import es.springframework.springrestmvc.repositories.CategoryRepository;
 import es.springframework.springrestmvc.repositories.CustomerRepository;
+import es.springframework.springrestmvc.repositories.VendorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -13,10 +15,13 @@ import org.springframework.stereotype.Component;
 public class Bootstrap implements CommandLineRunner {
     private CategoryRepository categoryRepository;
     private CustomerRepository customerRepository;
+    private VendorRepository vendorRepository;
 
-    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository) {
+    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository,
+                     VendorRepository vendorRepository) {
         this.categoryRepository = categoryRepository;
         this.customerRepository = customerRepository;
+        this.vendorRepository = vendorRepository;
     }
 
     @Override
@@ -58,5 +63,15 @@ public class Bootstrap implements CommandLineRunner {
 
         log.info("Customers Loaded: {}", customerRepository.count());
 
+        Vendor smallShop = new Vendor();
+        smallShop.setName("Small Shop");
+        smallShop.setVendorUrl("smallshop.com");
+
+        Vendor superMarket = new Vendor();
+        superMarket.setName("Super Market");
+        superMarket.setVendorUrl("supermarket.com");
+
+        vendorRepository.save(smallShop);
+        vendorRepository.save(superMarket);
     }
 }

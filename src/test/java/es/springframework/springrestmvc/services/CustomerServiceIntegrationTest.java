@@ -6,6 +6,7 @@ import es.springframework.springrestmvc.bootstrap.Bootstrap;
 import es.springframework.springrestmvc.domain.Customer;
 import es.springframework.springrestmvc.repositories.CategoryRepository;
 import es.springframework.springrestmvc.repositories.CustomerRepository;
+import es.springframework.springrestmvc.repositories.VendorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,6 +40,9 @@ public class CustomerServiceIntegrationTest {
     CategoryRepository categoryRepository;
 
     @Autowired
+    VendorRepository vendorRepository;
+
+    @Autowired
     CustomerMapper customerMapper = CustomerMapper.INSTANCE;
 
     CustomerService customerService;
@@ -49,7 +53,7 @@ public class CustomerServiceIntegrationTest {
         System.out.println(customerRepository.findAll().size());
 
         //setup data for testing
-        Bootstrap bootstrap = new Bootstrap(categoryRepository, customerRepository);
+        Bootstrap bootstrap = new Bootstrap(categoryRepository, customerRepository, vendorRepository);
         bootstrap.run(); //load data
 
         customerService = new CustomerServiceImpl(customerMapper, customerRepository);
