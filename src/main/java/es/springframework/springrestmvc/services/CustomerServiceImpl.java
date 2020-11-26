@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO getCustomerById(Long id) {
         return customerRepository.findById(id).map(customerMapper::customerToCustomerDT0)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
            customer.setFirstName(Optional.ofNullable(customerDTO.getFirstName()).orElse(customer.getFirstName()));
            customer.setLastName(Optional.ofNullable(customerDTO.getLastName()).orElse(customer.getLastName()));
            return customerMapper.customerToCustomerDT0(customerRepository.save(customer));
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
