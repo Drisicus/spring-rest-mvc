@@ -1,5 +1,6 @@
 package es.springframework.springrestmvc.api.v1.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VendorDTO {
     public Long id;
+
+    @ApiModelProperty(value = "Name of the vendor", required = true)
     public String name;
     public String vendorUrl;
 
