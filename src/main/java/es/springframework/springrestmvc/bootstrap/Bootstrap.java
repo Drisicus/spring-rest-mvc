@@ -73,5 +73,8 @@ public class Bootstrap implements CommandLineRunner {
 
         vendorRepository.save(smallShop);
         vendorRepository.save(superMarket);
+
+        log.info("Vendors Loaded: {}", vendorRepository.count());
+
     }
 }
