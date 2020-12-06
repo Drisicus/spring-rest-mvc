@@ -1,0 +1,15 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<!--    <xs:element name="customers" type="CustomerListDTO"/>-->
+    <xs:complexType name="CustomerListDTO">
+        <xs:sequence>
+            <xs:element type="CustomerDTO" name="CustomerDTO" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CustomerDTO">
+        <xs:attribute type="xs:long" name="id"/>
+        <xs:attribute type="xs:string" name="firstName"/>
+        <xs:attribute type="xs:string" name="lastName"/>
+        <xs:attribute type="xs:string" name="customerUrl"/>
+    </xs:complexType>
+</xs:schema>
+

@@ -1,6 +1,6 @@
 package es.springframework.springrestmvc.api.v1.mapper;
 
-import es.springframework.springrestmvc.api.v1.model.CustomerDTO;
+import es.springframework.model.CustomerDTO;
 import es.springframework.springrestmvc.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

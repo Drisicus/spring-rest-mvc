@@ -1,7 +1,9 @@
 package es.springframework.springrestmvc.controllers;
 
-import es.springframework.springrestmvc.api.v1.model.CustomerDTO;
-import es.springframework.springrestmvc.api.v1.model.CustomerListDTO;
+import es.springframework.model.CustomerDTO;
+import es.springframework.model.CustomerListDTO;
+//import es.springframework.model.CustomerDTO;
+//import es.springframework.springrestmvc.api.v1.model.CustomerListDTO;
 import es.springframework.springrestmvc.services.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,9 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<CustomerListDTO> getAllCustomers(){
-        return new ResponseEntity<>(new CustomerListDTO(customerService.getAllCustomers()), HttpStatus.OK);
+        CustomerListDTO customerListDTO = new CustomerListDTO();
+        customerListDTO.getCustomerDTO().addAll(customerService.getAllCustomers());
+        return new ResponseEntity<>(customerListDTO, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
